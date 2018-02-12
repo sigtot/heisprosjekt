@@ -1,2 +1,10 @@
+# User specific files :)
 .idea/
 cmake-build-debug/
+
+# Output files
+*.o
+
+# Object and bin directories
+bin/
+obj/
