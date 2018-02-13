@@ -12,12 +12,6 @@ int update_view(){
         elev_set_motor_direction(DIRN_STOP);
     }
 
-    /* Read from elevator (Does this break the MVC pattern?) */
-    current_floor = elev_get_floor_sensor_signal() + 1;
-
-    int at_floor = current_floor != 0;
-    if(at_floor) last_floor = current_floor;
-
     return 0;
 }
 

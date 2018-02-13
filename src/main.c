@@ -1,5 +1,6 @@
 #include "driver/elev.h"
 #include "model.h"
+#include "controller/event_controller.h"
 #include <stdio.h>
 
 int main() {
@@ -24,7 +25,7 @@ int main() {
             update_view();
         }
 
-        update_view();
+        listen_and_update_model();
         print_model_parameters();
 
         // Stop elevator and exit program if the stop button is pressed
