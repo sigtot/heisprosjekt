@@ -4,13 +4,32 @@
 #define clear() printf("\033[H\033[J")
 
 int update_view(){
-    /* Write to elevator */
+    /* Write movement to elevator */
     if(moving) {
         if(current_direction == UP) elev_set_motor_direction(DIRN_UP);
         else if(current_direction == DOWN) elev_set_motor_direction(DIRN_DOWN);
     } else {
         elev_set_motor_direction(DIRN_STOP);
     }
+
+    /* Show orders on the elevator lamps */
+    for(int floor = 0; floor <= 2; floor++){
+        int lamp_value = is_outside_ordered(floor, UP);
+        elev_set_button_lamp(BUTTON_CALL_UP, floor, lamp_value);
+    }
+
+    for(int floor = 1; floor <= 3; floor++){
+        int lamp_value = is_outside_ordered(floor, DOWN);
+        elev_set_button_lamp(BUTTON_CALL_DOWN, floor, lamp_value);
+    }
+
+    for(int floor = 0; floor <= 3; floor++){
+        int lamp_value = is_inside_ordered(floor);
+        elev_set_button_lamp(BUTTON_COMMAND, floor, lamp_value);
+    }
+
+    /* Show last floor on the elevator lamps */
+    elev_set_floor_indicator(last_floor);
 
     return 0;
 }
@@ -49,7 +68,7 @@ int is_outside_ordered(int floor, Direction direction) {
         return outside_up_orders[floor];
     } else {
         if(floor < 1 || floor > 3) return -1; // Invalid order
-        return outside_up_orders[floor - 1];
+        return outside_down_orders[floor - 1];
     }
 }
 
