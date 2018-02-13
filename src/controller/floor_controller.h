@@ -12,4 +12,4 @@
 /**
  * Listen for events and updates the model
  */
-void listen_and_update_model();
+void update_floor();

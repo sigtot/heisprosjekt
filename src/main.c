@@ -1,6 +1,6 @@
 #include "driver/elev.h"
 #include "model.h"
-#include "controller/event_controller.h"
+#include "controller/floor_controller.h"
 #include "controller/order_controller.h"
 #include <stdio.h>
 
@@ -27,7 +27,8 @@ int main() {
             update_view();
         }
 
-        listen_and_update_model();
+        update_floor();
+        update_order_list();
 
         print_model_parameters();
         update_view();

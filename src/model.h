@@ -9,11 +9,16 @@ Direction current_direction;
 
 int moving;
 
-int current_floor; // 0-3, 0 for between floors
+int current_floor; // 0-3, -1 for between floors
 
 int last_floor;
 
 int door_open;
+
+/**
+ * If the associated element is 1, the floor is ordered. 0 if not.
+ */
+int inside_orders[4]; // Floors 0-3
 
 /**
  * Arrays to keep track of outside orders
@@ -36,13 +41,7 @@ int outside_up_orders[3];
 int outside_down_orders[3];
 
 /**
- * If the associated element is 1, the floor is ordered. 0 if not.
- */
-int inside_orders[4]; // Floors 0-3
-
-/**
- * Update the elevator through the driver to
- * reflect the model parameters in the
+ * Update elevator to match model
  *
  * @return 0 for success
  */

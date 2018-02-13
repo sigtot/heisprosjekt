@@ -1,13 +1,8 @@
-#include "event_controller.h"
 #include "../model.h"
 #include "../driver/elev.h"
+#include "order_controller.h"
 
-void listen_and_update_model() {
-    current_floor = elev_get_floor_sensor_signal();
-
-    int at_floor = current_floor != -1;
-    if(at_floor) last_floor = current_floor;
-
+int update_order_list() {
     for(int floor = 0; floor <= 2; floor++){
         if(elev_get_button_signal(BUTTON_CALL_UP, floor)){
             add_outside_order(floor, UP);
@@ -25,4 +20,11 @@ void listen_and_update_model() {
             add_inside_order(floor);
         }
     }
+
+    if(current_floor != last_floor) return 0;
+
+    delete_inside_order(current_floor);
+    delete_outside_order(current_floor, current_direction);
+
+    return 0;
 }
