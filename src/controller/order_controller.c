@@ -3,6 +3,7 @@
 #include "order_controller.h"
 
 int update_order_list() {
+    // Listen for button presses and add corresponding orders
     for(int floor = 0; floor <= 2; floor++){
         if(elev_get_button_signal(BUTTON_CALL_UP, floor)){
             add_outside_order(floor, UP);
@@ -21,10 +22,11 @@ int update_order_list() {
         }
     }
 
-    if(current_floor != last_floor) return 0;
-
-    delete_inside_order(current_floor);
-    delete_outside_order(current_floor, current_direction);
+    // Delete fulfilled orders
+    if(current_floor != -1) {
+        delete_inside_order(current_floor);
+        delete_outside_order(current_floor, current_direction);
+    }
 
     return 0;
 }

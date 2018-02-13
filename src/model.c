@@ -31,6 +31,9 @@ int update_view(){
     /* Show last floor on the elevator lamps */
     elev_set_floor_indicator(last_floor);
 
+    /* Indicate open door with open door lamp */
+    elev_set_door_open_lamp(door_open);
+
     return 0;
 }
 

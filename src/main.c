@@ -14,6 +14,7 @@ int main() {
     printf("Press STOP button to stop elevator and exit program.\n");
 
     moving = 1;
+    door_open = 0;
     update_view();
 
     while (1) {
