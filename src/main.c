@@ -12,21 +12,21 @@ int main() {
     printf("Press STOP button to stop elevator and exit program.\n");
 
     moving = 1;
-    update_model();
+    update_view();
 
     while (1) {
         // Change direction when we reach top/bottom floor
         if (elev_get_floor_sensor_signal() == N_FLOORS - 1) {
             current_direction = down;
-            update_model();
+            update_view();
         } else if (elev_get_floor_sensor_signal() == 0) {
             current_direction = up;
-            update_model();
+            update_view();
         }
         // Stop elevator and exit program if the stop button is pressed
         if (elev_get_stop_signal()) {
             moving = 0;
-            update_model();
+            update_view();
             break;
         }
     }
