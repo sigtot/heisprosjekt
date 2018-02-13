@@ -3,13 +3,13 @@
 
 #endif //HEISPROSJEKT_MODEL_H
 
-typedef enum {up, down} Direction;
+typedef enum {UP, DOWN} Direction;
 
 Direction current_direction;
 
 int moving;
 
-int current_floor; // 1-4, 0 for between floors
+int current_floor; // 0-3, 0 for between floors
 
 int last_floor;
 
@@ -22,14 +22,14 @@ int door_open;
  * If the associated element is 1, the floor is ordered. 0 if not.
  *
  * Outside up orders:
- * 0: {1, up}
- * 1: {2, up}
- * 2: {3, up}
+ * 0: {0, up}
+ * 1: {1, up}
+ * 2: {2, up}
  *
  * Outside down orders:
- * 0: {2, down}
- * 1: {3, down}
- * 2: {4, down}
+ * 0: {1, down}
+ * 1: {2, down}
+ * 2: {3, down}
  *
  */
 int outside_up_orders[3];
@@ -38,7 +38,7 @@ int outside_down_orders[3];
 /**
  * If the associated element is 1, the floor is ordered. 0 if not.
  */
-int inside_orders[4]; // Floors 1-4
+int inside_orders[4]; // Floors 0-3
 
 /**
  * Update the elevator through the driver to

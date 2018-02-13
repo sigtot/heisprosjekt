@@ -18,10 +18,10 @@ int main() {
     while (1) {
         // Change direction when we reach top/bottom floor
         if (elev_get_floor_sensor_signal() == N_FLOORS - 1) {
-            current_direction = down;
+            current_direction = DOWN;
             update_view();
         } else if (elev_get_floor_sensor_signal() == 0) {
-            current_direction = up;
+            current_direction = UP;
             update_view();
         }
 
