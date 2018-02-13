@@ -23,6 +23,10 @@ int main() {
             current_direction = up;
             update_view();
         }
+
+        update_view();
+        print_model_parameters();
+
         // Stop elevator and exit program if the stop button is pressed
         if (elev_get_stop_signal()) {
             moving = 0;

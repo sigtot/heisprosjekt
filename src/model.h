@@ -9,16 +9,17 @@ Direction current_direction;
 
 int moving;
 
-int at_floor;
-
 int current_floor; // 1-4, 0 for between floors
 
 int last_floor;
+
+int door_open;
 
 /**
  * Arrays to keep track of outside orders
  * They should be "invisible" to the programmer and only accessed
  * through add_outside_order(), is_outside_ordered() and delete_outside_order()
+ * If the associated element is 1, the floor is ordered. 0 if not.
  *
  * Outside up orders:
  * 0: {1, up}
@@ -34,9 +35,10 @@ int last_floor;
 int outside_up_orders[3];
 int outside_down_orders[3];
 
-int inside_orders[4]; // 1-4
-
-int door_open;
+/**
+ * If the associated element is 1, the floor is ordered. 0 if not.
+ */
+int inside_orders[4]; // Floors 1-4
 
 /**
  * Update the elevator through the driver to
@@ -45,6 +47,8 @@ int door_open;
  * @return 0 for success
  */
 int update_view();
+
+void print_model_parameters();
 
 /**
  * Add outside order
@@ -56,7 +60,7 @@ int update_view();
 int add_outside_order(int floor, Direction direction);
 
 /**
- * Check if floor is ordered with specified direction
+ * Check if floor is outside ordered with specified direction
  *
  * @param floor
  * @param direction
@@ -72,3 +76,27 @@ int is_outside_ordered(int floor, Direction direction);
  * @return 0 for success, 1 for invalid order
  */
 int delete_outside_order(int floor, Direction direction);
+
+/**
+ * Add inside order
+ *
+ * @param floor
+ * @return 0 for success, 1 for invalid order
+ */
+int add_inside_order(int floor);
+
+/**
+ * Check if certain floor is inside ordered
+ *
+ * @param floor
+ * @return 1 if it is ordered, 0 if not, -1 if invalid order
+ */
+int is_inside_ordered(int floor);
+
+/**
+ * Delete inside order
+ *
+ * @param floor
+ * @return 0 for success, 1 for invalid order
+ */
+int delete_inside_order(int floor);
