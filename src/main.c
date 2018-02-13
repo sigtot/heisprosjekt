@@ -1,4 +1,5 @@
 #include "driver/elev.h"
+#include "model.h"
 #include <stdio.h>
 
 int main() {
