@@ -6,9 +6,9 @@ Heisprosjekt i tilpdat
 * gcc
 
 # Compilation
-* Run `make` to compile
+* `make` to compile
 * `make clean` to remove all binaries and object files
-* 'make rebuild' to remove binaries and objects files then recompile
+* `make rebuild` to remove binaries and object files then recompile
 
 # Usage
 * `./bin/heis` to run
