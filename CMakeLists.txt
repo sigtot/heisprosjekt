@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+project (heis C)
+enable_language(C)
+add_executable(heis src src/controller src/driver)
+SET_TARGET_PROPERTIES(heis PROPERTIES LINKER_LANGUAGE C)
