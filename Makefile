@@ -13,10 +13,10 @@ SRCDIR   = src
 OBJDIR   = obj
 BINDIR   = bin
 DRIVERDIR 	= $(SRCDIR)/driver
-MODULESDIR 	= $(SRCDIR)/modules
+CONTROLLERDIR 	= $(SRCDIR)/controller
 TESTSDIR	= $(SRCDIR)/tests
 
-SOURCES 	:= $(wildcard $(SRCDIR)/*.c) $(wildcard $(DRIVERDIR)/*.c) $(wildcard $(MODULESDIR)/*.c) $(wildcard $(TESTSDIR)/*.c)
+SOURCES 	:= $(wildcard $(SRCDIR)/*.c) $(wildcard $(DRIVERDIR)/*.c) $(wildcard $(CONTROLLERDIR)/*.c) $(wildcard $(TESTSDIR)/*.c)
 INCLUDES	:= $(wildcard $(SRCDIR)/*.h)
 OBJECTS		:= $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 rm			= rm -rf
