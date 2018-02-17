@@ -1,8 +1,11 @@
 #include "driver/elev.h"
 #include "model.h"
 #include "controller/floor_controller.h"
+#include "controller/door_controller.h"
+#include "controller/movement_controller.h"
 #include "controller/order_controller.h"
 #include <stdio.h>
+#include <time.h>
 
 int main() {
     // Initialize hardware
@@ -15,8 +18,10 @@ int main() {
 
     moving = 1;
     door_open = 0;
+    door_opened_timestamp = 0;
     update_view();
 
+    // Mainloop
     while (1) {
         // UP-DOWN state machine
         // Change direction when we reach top/bottom floor
@@ -28,12 +33,14 @@ int main() {
             update_view();
         }
 
+        // The order of these is very important
         update_floor();
-        update_order_list();
+        update_door();
+        update_movement();
+        update_order_list(); // Must come after update_door() and update_movement() as this deletes the orders
 
         print_model_parameters();
         update_view();
-
 
         // Stop elevator and exit program if the stop button is pressed
         if (elev_get_stop_signal()) {

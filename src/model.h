@@ -15,6 +15,8 @@ int last_floor;
 
 int door_open;
 
+long long door_opened_timestamp; // The time when the door last opened
+
 /**
  * If the associated element is 1, the floor is ordered. 0 if not.
  */
@@ -99,3 +101,23 @@ int is_inside_ordered(int floor);
  * @return 0 for success, 1 for invalid order
  */
 int delete_inside_order(int floor);
+
+/**
+ * Check if any floor is ordered
+ *
+ * @return 1 if orders exist, 0 if not
+ */
+int has_orders_not_on_current_floor();
+
+/**
+ * Check if any floors are ordered above the current floor
+ * @return
+ */
+int has_orders_above();
+
+
+/**
+ * check if any floors are ordered below the current floor
+ * @return
+ */
+int has_orders_below();
