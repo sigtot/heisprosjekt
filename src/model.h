@@ -110,14 +110,8 @@ int delete_inside_order(int floor);
 int has_orders_not_on_current_floor();
 
 /**
- * Check if any floors are ordered above the current floor
- * @return
+ * Check if there are orders left to serve
+ *
+ * @return 1 if there are unfulfilled orders, 0 if not
  */
-int has_orders_above();
-
-
-/**
- * check if any floors are ordered below the current floor
- * @return
- */
-int has_orders_below();
+int has_unfulfilled_orders();

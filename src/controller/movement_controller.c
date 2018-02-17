@@ -2,7 +2,7 @@
 #include "../model.h"
 
 void update_movement() {
-    if(!door_open && has_orders_not_on_current_floor()) {
+    if(!door_open && has_unfulfilled_orders()) {
         moving = 1;
     } else {
         moving = 0;

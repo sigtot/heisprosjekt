@@ -4,6 +4,7 @@
 #include "controller/door_controller.h"
 #include "controller/movement_controller.h"
 #include "controller/order_controller.h"
+#include "controller/direction_controller.h"
 #include <stdio.h>
 #include <time.h>
 
@@ -23,18 +24,9 @@ int main() {
 
     // Mainloop
     while (1) {
-        // UP-DOWN state machine
-        // Change direction when we reach top/bottom floor
-        if (elev_get_floor_sensor_signal() == N_FLOORS - 1) {
-            current_direction = DOWN;
-            update_view();
-        } else if (elev_get_floor_sensor_signal() == 0) {
-            current_direction = UP;
-            update_view();
-        }
-
         // The order of these is very important
         update_floor();
+        update_direction();
         update_door();
         update_movement();
         update_order_list(); // Must come after update_door() and update_movement() as this deletes the orders

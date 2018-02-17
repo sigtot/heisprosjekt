@@ -52,10 +52,6 @@ void print_model_parameters(){
     for(int floor = 1; floor <= 3; floor++){
         printf("Floor %i DOWN: %i ", floor, is_outside_ordered(floor, DOWN));
     }
-
-    printf("\n\n\n");
-    printf("Has orders not on current floor: %d\n", has_orders_not_on_current_floor());
-
 }
 
 int add_outside_order(int floor, Direction direction) {
@@ -125,46 +121,20 @@ int has_orders_not_on_current_floor() {
     return 0;
 }
 
-/**
- * The below functions only work when the elevator is at a floor, and should therefore not be included
- * in the code. I'm keeping them around in case we need the logic for later
- */
-/*
-int has_orders_above() {
-    if(current_floor == 3) return 0;
-    if(current_floor == -1) return -1; // Not defined between floors
-
-    int floor_above = current_floor + 1;
-    for(int floor = floor_above; floor <= 2; floor++){
+int has_unfulfilled_orders() {
+    for(int floor = 0; floor <= 2; floor++){
+        if(floor == current_floor && current_direction == UP) continue;
         if(is_outside_ordered(floor, UP)) return 1;
     }
 
-    for(int floor = floor_above; floor <= 3; floor++){
+    for(int floor = 1; floor <= 3; floor++){
+        if(floor == current_floor && current_direction == DOWN) continue;
         if(is_outside_ordered(floor, DOWN)) return 1;
     }
 
-    for(int floor = floor_above; floor <= 3; floor++){
+    for(int floor = 0; floor <= 3; floor++){
+        if(floor == current_floor) continue;
         if(is_inside_ordered(floor)) return 1;
     }
     return 0;
 }
-
-int has_orders_below() {
-    if(current_floor == 0) return 0;
-    if(current_floor == -1) return -1; // Not defined between floors
-
-    int floor_below = current_floor - 1;
-    for(int floor = floor_below; floor >= 0; floor--){
-        if(is_outside_ordered(floor, UP)) return 1;
-    }
-
-    for(int floor = floor_below; floor >= 1; floor++){
-        if(is_outside_ordered(floor, DOWN)) return 1;
-    }
-
-    for(int floor = floor_below; floor >= 0; floor++){
-        if(is_inside_ordered(floor)) return 1;
-    }
-    return 0;
-}
-*/
