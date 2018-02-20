@@ -138,3 +138,47 @@ int has_unfulfilled_orders() {
     }
     return 0;
 }
+
+/**
+ * WARNING: Does not work between floors
+ */
+int has_orders_above() {
+    if(current_floor == 3) return 0;
+    if(current_floor == -1) return -1; // Not defined between floors
+
+    int floor_above = current_floor + 1;
+    for(int floor = floor_above; floor <= 2; floor++){
+        if(is_outside_ordered(floor, UP)) return 1;
+    }
+
+    for(int floor = floor_above; floor <= 3; floor++){
+        if(is_outside_ordered(floor, DOWN)) return 1;
+    }
+
+    for(int floor = floor_above; floor <= 3; floor++){
+        if(is_inside_ordered(floor)) return 1;
+    }
+    return 0;
+}
+
+/**
+ * WARNING: Does not work between floors
+ */
+int has_orders_below() {
+    if(current_floor == 0) return 0;
+    if(current_floor == -1) return -1; // Not defined between floors
+
+    int floor_below = current_floor - 1;
+    for(int floor = floor_below; floor >= 0; floor--){
+        if(is_outside_ordered(floor, UP)) return 1;
+    }
+
+    for(int floor = floor_below; floor >= 1; floor--){
+        if(is_outside_ordered(floor, DOWN)) return 1;
+    }
+
+    for(int floor = floor_below; floor >= 0; floor--){
+        if(is_inside_ordered(floor)) return 1;
+    }
+    return 0;
+}
