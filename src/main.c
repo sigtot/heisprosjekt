@@ -1,5 +1,12 @@
 #include "driver/elev.h"
+#include "model.h"
+#include "controller/floor_controller.h"
+#include "controller/door_controller.h"
+#include "controller/movement_controller.h"
+#include "controller/order_controller.h"
+#include "controller/direction_controller.h"
 #include <stdio.h>
+#include <time.h>
 
 int main() {
     // Initialize hardware
@@ -10,19 +17,27 @@ int main() {
 
     printf("Press STOP button to stop elevator and exit program.\n");
 
-    elev_set_motor_direction(DIRN_UP);
+    moving = 1;
+    door_open = 0;
+    door_opened_timestamp = 0;
+    update_view();
 
+    // Mainloop
     while (1) {
-        // Change direction when we reach top/bottom floor
-        if (elev_get_floor_sensor_signal() == N_FLOORS - 1) {
-            elev_set_motor_direction(DIRN_DOWN);
-        } else if (elev_get_floor_sensor_signal() == 0) {
-            elev_set_motor_direction(DIRN_UP);
-        }
+        // The order of these is very important
+        update_floor();
+        update_direction();
+        update_door();
+        update_movement();
+        update_order_list(); // Must come after update_door() and update_movement() as this deletes the orders
+
+        print_model_parameters();
+        update_view();
 
         // Stop elevator and exit program if the stop button is pressed
         if (elev_get_stop_signal()) {
-            elev_set_motor_direction(DIRN_STOP);
+            moving = 0;
+            update_view();
             break;
         }
     }
