@@ -22,6 +22,8 @@ int door_open;
 
 long long door_opened_timestamp; // The time when the door last opened
 
+int emergency;
+
 /**
  * If the associated element is 1, the floor is ordered. 0 if not.
  */

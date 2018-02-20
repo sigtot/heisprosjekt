@@ -139,14 +139,14 @@ int has_unfulfilled_orders() {
     return 0;
 }
 
-/**
- * WARNING: Does not work between floors
- */
 int has_orders_above() {
     if(current_floor == TOP_FLOOR) return 0;
-    if(current_floor == -1) return -1; // Not defined between floors
 
-    int floor_above = current_floor + 1;
+    int floor_above = 1;
+    if(current_floor != -1) floor_above = current_floor + 1;
+    else if(current_direction == DOWN) floor_above = last_floor;
+    else if(current_direction == UP) floor_above = last_floor + 1;
+
     for(int floor = floor_above; floor <= TOP_FLOOR - 1; floor++){
         if(is_outside_ordered(floor, UP)) return 1;
     }
@@ -161,14 +161,14 @@ int has_orders_above() {
     return 0;
 }
 
-/**
- * WARNING: Does not work between floors
- */
 int has_orders_below() {
     if(current_floor == 0) return 0;
-    if(current_floor == -1) return -1; // Not defined between floors
 
-    int floor_below = current_floor - 1;
+    int floor_below = 0;
+    if(current_floor != -1) floor_below = current_floor - 1;
+    else if(current_direction == DOWN) floor_below = last_floor - 1;
+    else if(current_direction == UP) floor_below = last_floor;
+
     for(int floor = floor_below; floor >= 0; floor--){
         if(is_outside_ordered(floor, UP)) return 1;
     }

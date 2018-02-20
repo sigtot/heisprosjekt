@@ -4,19 +4,6 @@
 
 #include <sys/timeb.h>
 
-long long get_timestamp_in_milliseconds() {
-    struct timeb timer_msec;
-    long long int timestamp_msec;
-    if (!ftime(&timer_msec)) {
-        timestamp_msec = ((long long int) timer_msec.time) * 1000ll +
-                         (long long int) timer_msec.millitm;
-    }
-    else {
-        timestamp_msec = -1;
-    }
-    return timestamp_msec;
-}
-
 void update_door() {
     if(current_floor == -1){
         return;
@@ -37,6 +24,8 @@ void update_door() {
         door_open = 0; // Close it
     }
 
+
+
     /* Logic to open the door when the elevator is ordered from the current floor */
 
     // Elevator is waiting to go up and someone wants to get on and go up
@@ -54,4 +43,17 @@ void update_door() {
     }
 
     /* --------- */
+}
+
+long long get_timestamp_in_milliseconds() {
+    struct timeb timer_msec;
+    long long int timestamp_msec;
+    if (!ftime(&timer_msec)) {
+        timestamp_msec = ((long long int) timer_msec.time) * 1000ll +
+                         (long long int) timer_msec.millitm;
+    }
+    else {
+        timestamp_msec = -1;
+    }
+    return timestamp_msec;
 }

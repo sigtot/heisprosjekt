@@ -15,8 +15,6 @@ int main() {
         return 1;
     }
 
-    printf("Press STOP button to stop elevator and exit program.\n");
-
     moving = 1;
     door_open = 0;
     door_opened_timestamp = 0;
@@ -34,12 +32,8 @@ int main() {
         print_model_parameters();
         update_view();
 
-        // Stop elevator and exit program if the stop button is pressed
-        if (elev_get_stop_signal()) {
-            moving = 0;
-            update_view();
-            break;
-        }
+        // Emergency stop pressed
+        if (elev_get_stop_signal()) emergency = 1;
     }
 
     return 0;

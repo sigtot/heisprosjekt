@@ -3,4 +3,5 @@
 
 #endif //HEIS_LIGHT_CONTROLLER_H
 
+void delete_all_orders();
 void update_order_list();
