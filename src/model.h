@@ -115,3 +115,15 @@ int has_orders_not_on_current_floor();
  * @return 1 if there are unfulfilled orders, 0 if not
  */
 int has_unfulfilled_orders();
+
+/**
+ * WARNING: Does not work between floors
+ * @return 1 if orders exist, 0 if not
+ */
+int has_orders_above();
+
+/**
+ * WARNING: Does not work between floors
+ * @return 1 if orders exist, 0 if not
+ */
+int has_orders_below();
