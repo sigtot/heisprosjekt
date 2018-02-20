@@ -67,10 +67,10 @@ int add_outside_order(int floor, Direction direction) {
 
 int is_outside_ordered(int floor, Direction direction) {
     if(direction == UP){
-        if(floor < 0 || floor > TOP_FLOOR - 1) return -1; // Invalid order
+        if(floor < 0 || floor > TOP_FLOOR - 1) return 0; // Invalid order
         return outside_up_orders[floor];
     } else {
-        if(floor < 1 || floor > TOP_FLOOR) return -1; // Invalid order
+        if(floor < 1 || floor > TOP_FLOOR) return 0; // Invalid order
         return outside_down_orders[floor - 1];
     }
 }
@@ -93,7 +93,7 @@ int add_inside_order(int floor){
 }
 
 int is_inside_ordered(int floor){
-    if(floor < 0 || floor > TOP_FLOOR) return -1; // Invalid order
+    if(floor < 0 || floor > TOP_FLOOR) return 0; // Invalid order
     return inside_orders[floor];
 }
 

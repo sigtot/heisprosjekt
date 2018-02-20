@@ -36,4 +36,22 @@ void update_door() {
     } else {
         door_open = 0; // Close it
     }
+
+    /* Logic to open the door when the elevator is ordered from the current floor */
+
+    // Elevator is waiting to go up and someone wants to get on and go up
+    int a = (is_outside_ordered(current_floor, UP) && current_direction == UP && has_orders_above());
+
+    // Elevator is waiting to go down and someone wants to get on and go down
+    int b = (is_outside_ordered(current_floor, DOWN) && current_direction == DOWN && has_orders_below());
+
+    // Elevator has fulfilled all orders and someone wants to get on
+    int c = !has_orders_not_on_current_floor() && (is_outside_ordered(current_floor, UP) || is_outside_ordered(current_floor, DOWN));
+
+    if(!moving && (a || b || c)){
+        door_open = 1;
+        door_opened_timestamp = get_timestamp_in_milliseconds();
+    }
+
+    /* --------- */
 }

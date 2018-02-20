@@ -70,7 +70,7 @@ int add_outside_order(int floor, Direction direction);
  *
  * @param floor
  * @param direction
- * @return 1 if it is ordered, 0 if not, -1 if invalid order
+ * @return 1 if it is ordered, 0 if not
  */
 int is_outside_ordered(int floor, Direction direction);
 
@@ -95,7 +95,7 @@ int add_inside_order(int floor);
  * Check if certain floor is inside ordered
  *
  * @param floor
- * @return 1 if it is ordered, 0 if not, -1 if invalid order
+ * @return 1 if it is ordered, 0 if not
  */
 int is_inside_ordered(int floor);
 
