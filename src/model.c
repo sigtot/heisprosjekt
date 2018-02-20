@@ -13,17 +13,17 @@ int update_view(){
     }
 
     /* Show orders on the elevator lamps */
-    for(int floor = 0; floor <= 2; floor++){
+    for(int floor = 0; floor <= TOP_FLOOR - 1; floor++){
         int lamp_value = is_outside_ordered(floor, UP);
         elev_set_button_lamp(BUTTON_CALL_UP, floor, lamp_value);
     }
 
-    for(int floor = 1; floor <= 3; floor++){
+    for(int floor = 1; floor <= TOP_FLOOR; floor++){
         int lamp_value = is_outside_ordered(floor, DOWN);
         elev_set_button_lamp(BUTTON_CALL_DOWN, floor, lamp_value);
     }
 
-    for(int floor = 0; floor <= 3; floor++){
+    for(int floor = 0; floor <= TOP_FLOOR; floor++){
         int lamp_value = is_inside_ordered(floor);
         elev_set_button_lamp(BUTTON_COMMAND, floor, lamp_value);
     }
@@ -56,10 +56,10 @@ void print_model_parameters(){
 
 int add_outside_order(int floor, Direction direction) {
     if(direction == UP){
-        if(floor < 0 || floor > 2) return 1; // Invalid order
+        if(floor < 0 || floor > TOP_FLOOR - 1) return 1; // Invalid order
         outside_up_orders[floor] = 1;
     } else {
-        if(floor < 1|| floor > 3) return 1; // Invalid order
+        if(floor < 1|| floor > TOP_FLOOR) return 1; // Invalid order
         outside_down_orders[floor - 1] = 1;
     }
     return 0;
@@ -67,54 +67,54 @@ int add_outside_order(int floor, Direction direction) {
 
 int is_outside_ordered(int floor, Direction direction) {
     if(direction == UP){
-        if(floor < 0 || floor > 2) return -1; // Invalid order
+        if(floor < 0 || floor > TOP_FLOOR - 1) return -1; // Invalid order
         return outside_up_orders[floor];
     } else {
-        if(floor < 1 || floor > 3) return -1; // Invalid order
+        if(floor < 1 || floor > TOP_FLOOR) return -1; // Invalid order
         return outside_down_orders[floor - 1];
     }
 }
 
 int delete_outside_order(int floor, Direction direction) {
     if(direction == UP){
-        if(floor < 0 || floor > 2) return 1; // Invalid order
+        if(floor < 0 || floor > TOP_FLOOR - 1) return 1; // Invalid order
         outside_up_orders[floor] = 0;
     } else {
-        if(floor < 1 || floor > 3) return 1; // Invalid order
+        if(floor < 1 || floor > TOP_FLOOR) return 1; // Invalid order
         outside_down_orders[floor - 1] = 0;
     }
     return 0;
 }
 
 int add_inside_order(int floor){
-    if(floor < 0 || floor > 3) return 1; // Invalid order
+    if(floor < 0 || floor > TOP_FLOOR) return 1; // Invalid order
     inside_orders[floor] = 1;
     return 0;
 }
 
 int is_inside_ordered(int floor){
-    if(floor < 0 || floor > 3) return -1; // Invalid order
+    if(floor < 0 || floor > TOP_FLOOR) return -1; // Invalid order
     return inside_orders[floor];
 }
 
 int delete_inside_order(int floor){
-    if(floor < 0 || floor > 3) return 1; // Invalid order
+    if(floor < 0 || floor > TOP_FLOOR) return 1; // Invalid order
     inside_orders[floor] = 0;
     return 0;
 }
 
 int has_orders_not_on_current_floor() {
-    for(int floor = 0; floor <= 2; floor++){
+    for(int floor = 0; floor <= TOP_FLOOR - 1; floor++){
         if(floor == current_floor) continue;
         if(is_outside_ordered(floor, UP)) return 1;
     }
 
-    for(int floor = 1; floor <= 3; floor++){
+    for(int floor = 1; floor <= TOP_FLOOR; floor++){
         if(floor == current_floor) continue;
         if(is_outside_ordered(floor, DOWN)) return 1;
     }
 
-    for(int floor = 0; floor <= 3; floor++){
+    for(int floor = 0; floor <= TOP_FLOOR; floor++){
         if(floor == current_floor) continue;
         if(is_inside_ordered(floor)) return 1;
     }
@@ -122,17 +122,17 @@ int has_orders_not_on_current_floor() {
 }
 
 int has_unfulfilled_orders() {
-    for(int floor = 0; floor <= 2; floor++){
+    for(int floor = 0; floor <= TOP_FLOOR - 1; floor++){
         if(floor == current_floor && current_direction == UP) continue;
         if(is_outside_ordered(floor, UP)) return 1;
     }
 
-    for(int floor = 1; floor <= 3; floor++){
+    for(int floor = 1; floor <= TOP_FLOOR; floor++){
         if(floor == current_floor && current_direction == DOWN) continue;
         if(is_outside_ordered(floor, DOWN)) return 1;
     }
 
-    for(int floor = 0; floor <= 3; floor++){
+    for(int floor = 0; floor <= TOP_FLOOR; floor++){
         if(floor == current_floor) continue;
         if(is_inside_ordered(floor)) return 1;
     }
@@ -143,19 +143,19 @@ int has_unfulfilled_orders() {
  * WARNING: Does not work between floors
  */
 int has_orders_above() {
-    if(current_floor == 3) return 0;
+    if(current_floor == TOP_FLOOR) return 0;
     if(current_floor == -1) return -1; // Not defined between floors
 
     int floor_above = current_floor + 1;
-    for(int floor = floor_above; floor <= 2; floor++){
+    for(int floor = floor_above; floor <= TOP_FLOOR - 1; floor++){
         if(is_outside_ordered(floor, UP)) return 1;
     }
 
-    for(int floor = floor_above; floor <= 3; floor++){
+    for(int floor = floor_above; floor <= TOP_FLOOR; floor++){
         if(is_outside_ordered(floor, DOWN)) return 1;
     }
 
-    for(int floor = floor_above; floor <= 3; floor++){
+    for(int floor = floor_above; floor <= TOP_FLOOR; floor++){
         if(is_inside_ordered(floor)) return 1;
     }
     return 0;

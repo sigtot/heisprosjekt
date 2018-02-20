@@ -23,7 +23,7 @@ void update_door() {
     }
 
     int has_been_ordered_here = is_inside_ordered(current_floor) || is_outside_ordered(current_floor, current_direction);
-    int door_wait_time_over = door_opened_timestamp < get_timestamp_in_milliseconds() - 3000;
+    int door_wait_time_over = door_opened_timestamp < get_timestamp_in_milliseconds() - DOOR_WAIT_TIME;
 
     if(has_been_ordered_here) {
         door_open = 1; // Open the door

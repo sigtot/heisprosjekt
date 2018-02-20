@@ -3,4 +3,4 @@
 
 #endif //HEIS_LIGHT_CONTROLLER_H
 
-int update_order_list();
+void update_order_list();
