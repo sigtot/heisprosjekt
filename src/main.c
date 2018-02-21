@@ -5,10 +5,15 @@
 #include "controller/movement_controller.h"
 #include "controller/order_controller.h"
 #include "controller/direction_controller.h"
+#include "web_updater.h"
 #include <stdio.h>
 #include <time.h>
+#include <curl/curl.h>
 
 int main() {
+    // Globally initialize curl (for web)
+    curl_global_init(CURL_GLOBAL_ALL);
+
     // Initialize hardware
     if (!elev_init()) {
         printf("Unable to initialize elevator hardware!\n");
@@ -33,6 +38,7 @@ int main() {
 
         print_model_parameters();
         update_view();
+        update_web_view();
 
         // Stop elevator and exit program if the stop button is pressed
         if (elev_get_stop_signal()) {
@@ -41,6 +47,9 @@ int main() {
             break;
         }
     }
+
+    // Globally cleanup curl (for web)
+    curl_global_cleanup();
 
     return 0;
 }
