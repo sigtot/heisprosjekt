@@ -23,7 +23,7 @@ void update_web_view() {
 
         /* Set url and data */
         curl_easy_setopt(curl, CURLOPT_URL, "159.65.58.116/heis-web/");
-        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "name=daniel&project=curl");
+        curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data_string);
 
         /* Perform the request*/
         curl_easy_perform(curl);
