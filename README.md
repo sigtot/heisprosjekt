@@ -1,6 +1,6 @@
 # Heisprosjekt
 Heisprosjekt i tilpdat
-TTK4125 Tilpassede Datasystemer
+TTK4235 Tilpassede Datasystemer
 
 # Dependencies
 * comedilib
