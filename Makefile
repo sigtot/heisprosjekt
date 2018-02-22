@@ -6,7 +6,7 @@ CFLAGS   = -std=c99 -Wall -I.
 
 LINKER   = gcc
 # linking flags here
-LFLAGS   = -Wall -I. -lcomedi -lm
+LFLAGS   = -Wall -I. -lcomedi -lm -lcurl
 
 # change these to proper directories where each file should be
 SRCDIR   = src
