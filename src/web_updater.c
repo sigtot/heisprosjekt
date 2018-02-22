@@ -32,3 +32,26 @@ void update_web_view() {
         curl_easy_cleanup(curl);
     }
 }
+
+void get_orders_from_web() {
+    int update_interval = 100;
+    struct timeb timer_msec;
+    ftime(&timer_msec);
+    int milliseconds = timer_msec.millitm;
+    if(milliseconds % update_interval != 0) return;
+
+    CURL *curl;
+
+    /* Get a curl handle */
+    curl = curl_easy_init();
+    if(curl) {
+        char order_string [4];
+
+        curl_easy_setopt(curl, CURLOPT_URL, "159.65.58.116/heis-web/orders.php");
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &order_string);
+        curl_easy_perform(curl);
+
+        printf("%s", order_string);
+        curl_easy_cleanup(curl);
+    }
+}

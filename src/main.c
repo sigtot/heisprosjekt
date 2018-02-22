@@ -36,7 +36,10 @@ int main() {
 
         print_model_parameters();
         update_view();
+
+        //Web stuff (not a part of project)
         update_web_view();
+        get_orders_from_web();
 
         // Emergency stop pressed
         if (elev_get_stop_signal()) emergency = 1;
