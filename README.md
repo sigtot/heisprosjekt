@@ -4,6 +4,7 @@ Heisprosjekt i tilpdat
 # Dependencies
 * comedilib
 * gcc
+* libcurl
 
 # Compilation
 * `make` to compile
