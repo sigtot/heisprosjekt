@@ -124,13 +124,21 @@ int has_orders_not_on_current_floor();
 int has_unfulfilled_orders();
 
 /**
- * WARNING: Does not work between floors
+ * Check if orders above elevator exist
+ *
+ * When the elevator is at a floor, that floor is skipped in the check.
+ * Otherwise, all floors are checked.
+ *
  * @return 1 if orders exist, 0 if not
  */
 int has_orders_above();
 
 /**
- * WARNING: Does not work between floors
+ * Check if orders below elevator exist
+ *
+ * When the elevator is at a floor, that floor is skipped in the check.
+ * Otherwise, all floors are checked.
+ *
  * @return 1 if orders exist, 0 if not
  */
 int has_orders_below();

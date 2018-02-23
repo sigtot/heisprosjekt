@@ -8,11 +8,15 @@
 #include "web_updater.h"
 #include <stdio.h>
 #include <time.h>
-#include <curl/curl.h>
+#include <string.h>
 
-int main() {
-    // Globally initialize curl (for web)
-    curl_global_init(CURL_GLOBAL_ALL);
+int main(int argc, char* argv[]) {
+    int web_enabled = 0;
+
+    // Loop over command line flags
+    for(int i = 0; i < argc; i++){
+        if(strcmp(argv[i], "--web") == 0 || strcmp(argv[i], "-w") == 0) web_enabled = 1;
+    }
 
     // Initialize hardware
     if (!elev_init()) {
@@ -20,6 +24,7 @@ int main() {
         return 1;
     }
 
+    // Initialize model values
     moving = 1;
     door_open = 0;
     door_opened_timestamp = 0;
@@ -38,14 +43,11 @@ int main() {
         update_view();
 
         //Web stuff (not a part of project)
-        update_web_view();
+        if(web_enabled) update_web_view();
 
         // Emergency stop pressed
         if (elev_get_stop_signal()) emergency = 1;
     }
-
-    // Globally cleanup curl (for web)
-    curl_global_cleanup();
 
     return 0;
 }
