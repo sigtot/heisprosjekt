@@ -6,7 +6,7 @@ TTK4235 Tilpassede Datasystemer
 # Dependencies
 * comedilib
 * gcc
-* libcurl
+* curl
 
 # Compilation
 * `make` to compile
