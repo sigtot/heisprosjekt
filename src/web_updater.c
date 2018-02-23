@@ -1,3 +1,4 @@
+#define _BSD_SOURCE
 #include "web_updater.h"
 #include "model.h"
 #include <sys/timeb.h>
@@ -7,7 +8,7 @@
 #include <memory.h>
 
 void update_web_view() {
-    int update_interval = 100;
+    int update_interval = 25;
     struct timeb timer_msec;
     ftime(&timer_msec);
     int milliseconds = timer_msec.millitm;
@@ -36,6 +37,12 @@ void update_web_view() {
 }
 
 void get_orders_from_web() {
+    int update_interval = 25;
+    struct timeb timer_msec;
+    ftime(&timer_msec);
+    int milliseconds = timer_msec.millitm;
+    if((milliseconds + 12) % update_interval != 0) return;
+
     /* Putting the curled data into a string turned out to be
      * too much of a headache, so I'm just running curl
      * directly :) This is bad, i know */
