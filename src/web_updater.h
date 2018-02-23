@@ -10,5 +10,3 @@
  * required part of the elevator project. It can be safely ignored.
  */
 void update_web_view();
-
-void get_orders_from_web();
