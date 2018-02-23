@@ -3,4 +3,7 @@
 
 #endif //HEIS_DIRECTION_CONTROLLER_H
 
+/**
+ * Update the direction
+ */
 void update_direction();

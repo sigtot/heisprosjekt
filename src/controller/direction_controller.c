@@ -5,13 +5,13 @@ void update_direction() {
     if(current_floor == TOP_FLOOR) current_direction = DOWN;
     if(current_floor == 0) current_direction = UP;
 
-    // Only orders above
-    if(has_orders_above() && !has_orders_below()){
+    // Only orders above (or at the current floor in the current direction)
+    if(has_orders_above() && !has_orders_below() && !is_outside_ordered(current_floor, current_direction)){
         current_direction = UP;
     }
 
-    // Only orders below
-    if(has_orders_below() && !has_orders_above()){
+    // Only orders below (or at the current floor in the current direction)
+    if(has_orders_below() && !has_orders_above() && !is_outside_ordered(current_floor, current_direction)){
         current_direction = DOWN;
     }
 
