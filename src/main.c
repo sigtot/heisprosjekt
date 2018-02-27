@@ -30,7 +30,13 @@ int main(int argc, char* argv[]) {
     initialize_model(UP);
     do {
         update_floor();
-    } while (get_current_floor() == -1);
+
+        // Light up all floors during startup (if between floors)
+        if(last_floor < TOP_FLOOR) last_floor++;
+        else last_floor = 0;
+
+        update_view();
+    } while (initializing);
 
     // Mainloop
     while (1) {

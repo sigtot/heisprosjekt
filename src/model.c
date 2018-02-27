@@ -41,14 +41,13 @@ int update_view(){
 }
 
 void initialize_model(Direction direction) {
+    initializing = 1;
     moving = 1;
     current_direction = direction;
     door_open = 0;
     door_opened_timestamp = 0;
     stop_button_pressed = 0;
     emergency = 0;
-
-    update_view();
 }
 
 void print_model_parameters(){
