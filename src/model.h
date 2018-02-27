@@ -15,6 +15,7 @@ Direction current_direction;
 int moving;
 
 int current_floor; // 0-3, -1 for between floors
+int current_position; // 0-6, even = at floor, odd = between floor
 
 int last_floor;
 
@@ -142,3 +143,16 @@ int has_orders_above();
  * @return 1 if orders exist, 0 if not
  */
 int has_orders_below();
+
+/**
+ * Gets the current floor
+ *
+ * @return 0 - TOP_FLOOR or -1 if between floors
+ */
+int get_current_floor();
+
+/**
+ * Sets current floor
+ * @param floor 0 - TOP_FLOOR or -1 if between floors
+ */
+void set_current_floor(int floor);

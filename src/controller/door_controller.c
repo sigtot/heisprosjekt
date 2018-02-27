@@ -5,11 +5,11 @@
 #include <sys/timeb.h>
 
 void update_door() {
-    if(current_floor == -1){
+    if(get_current_floor() == -1){
         return;
     }
 
-    int has_been_ordered_here = is_inside_ordered(current_floor) || is_outside_ordered(current_floor, current_direction);
+    int has_been_ordered_here = is_inside_ordered(get_current_floor()) || is_outside_ordered(get_current_floor(), current_direction);
     int door_wait_time_over = door_opened_timestamp < get_timestamp_in_milliseconds() - DOOR_WAIT_TIME;
 
     if(has_been_ordered_here) {
@@ -29,13 +29,13 @@ void update_door() {
     /* Logic to open the door when the elevator is ordered from the current floor */
 
     // Elevator is waiting to go up and someone wants to get on and go up
-    int a = (is_outside_ordered(current_floor, UP) && current_direction == UP && has_orders_above());
+    int a = (is_outside_ordered(get_current_floor(), UP) && current_direction == UP && has_orders_above());
 
     // Elevator is waiting to go down and someone wants to get on and go down
-    int b = (is_outside_ordered(current_floor, DOWN) && current_direction == DOWN && has_orders_below());
+    int b = (is_outside_ordered(get_current_floor(), DOWN) && current_direction == DOWN && has_orders_below());
 
     // Elevator has fulfilled all orders and someone wants to get on
-    int c = !has_orders_not_on_current_floor() && (is_outside_ordered(current_floor, UP) || is_outside_ordered(current_floor, DOWN));
+    int c = !has_orders_not_on_current_floor() && (is_outside_ordered(get_current_floor(), UP) || is_outside_ordered(get_current_floor(), DOWN));
 
     if(!moving && (a || b || c)){
         door_open = 1;

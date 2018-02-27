@@ -41,7 +41,8 @@ void print_model_parameters(){
     clear();
     printf("Direction: %i\n", current_direction);
     printf("Moving: %i\n", moving);
-    printf("Current floor: %i\n", current_floor);
+    printf("Current floor: %i\n", get_current_floor());
+    printf("Current position: %i\n", current_position);
     printf("Last floor: %i\n", last_floor);
     printf("Door open: %i\n", door_open);
 
@@ -105,17 +106,17 @@ int delete_inside_order(int floor){
 
 int has_orders_not_on_current_floor() {
     for(int floor = 0; floor <= TOP_FLOOR - 1; floor++){
-        if(floor == current_floor) continue;
+        if(floor == get_current_floor()) continue;
         if(is_outside_ordered(floor, UP)) return 1;
     }
 
     for(int floor = 1; floor <= TOP_FLOOR; floor++){
-        if(floor == current_floor) continue;
+        if(floor == get_current_floor()) continue;
         if(is_outside_ordered(floor, DOWN)) return 1;
     }
 
     for(int floor = 0; floor <= TOP_FLOOR; floor++){
-        if(floor == current_floor) continue;
+        if(floor == get_current_floor()) continue;
         if(is_inside_ordered(floor)) return 1;
     }
     return 0;
@@ -123,29 +124,26 @@ int has_orders_not_on_current_floor() {
 
 int has_unfulfilled_orders() {
     for(int floor = 0; floor <= TOP_FLOOR - 1; floor++){
-        if(floor == current_floor && current_direction == UP) continue;
+        if(floor == get_current_floor() && current_direction == UP) continue;
         if(is_outside_ordered(floor, UP)) return 1;
     }
 
     for(int floor = 1; floor <= TOP_FLOOR; floor++){
-        if(floor == current_floor && current_direction == DOWN) continue;
+        if(floor == get_current_floor() && current_direction == DOWN) continue;
         if(is_outside_ordered(floor, DOWN)) return 1;
     }
 
     for(int floor = 0; floor <= TOP_FLOOR; floor++){
-        if(floor == current_floor) continue;
+        if(floor == get_current_floor()) continue;
         if(is_inside_ordered(floor)) return 1;
     }
     return 0;
 }
 
 int has_orders_above() {
-    if(current_floor == TOP_FLOOR) return 0;
+    if(get_current_floor() == TOP_FLOOR) return 0;
 
-    int floor_above = 1;
-    if(current_floor != -1) floor_above = current_floor + 1;
-    else if(current_direction == DOWN) floor_above = last_floor;
-    else if(current_direction == UP) floor_above = last_floor + 1;
+    int floor_above = (current_position + 2) / 2;
 
     for(int floor = floor_above; floor <= TOP_FLOOR - 1; floor++){
         if(is_outside_ordered(floor, UP)) return 1;
@@ -162,12 +160,9 @@ int has_orders_above() {
 }
 
 int has_orders_below() {
-    if(current_floor == 0) return 0;
+    if(get_current_floor() == 0) return 0;
 
-    int floor_below = 0;
-    if(current_floor != -1) floor_below = current_floor - 1;
-    else if(current_direction == DOWN) floor_below = last_floor - 1;
-    else if(current_direction == UP) floor_below = last_floor;
+    int floor_below = (current_position - 1) / 2;
 
     for(int floor = floor_below; floor >= 0; floor--){
         if(is_outside_ordered(floor, UP)) return 1;
@@ -181,4 +176,26 @@ int has_orders_below() {
         if(is_inside_ordered(floor)) return 1;
     }
     return 0;
+}
+
+int get_current_floor() {
+    int even = current_position % 2 == 0;
+    if (even) {
+        return current_position / 2; // At floor
+    }
+    return -1; // Between floors
+}
+
+void set_current_floor(int floor) {
+    if(floor < -1 || floor > TOP_FLOOR) return; // Error: Outside range
+
+    if(floor == -1){
+        if(current_position % 2 == 0){
+            // Leaving floor
+            if (current_direction == UP) current_position++;
+            if (current_direction == DOWN) current_position--;
+        }
+    } else {
+        current_position = floor * 2;
+    }
 }

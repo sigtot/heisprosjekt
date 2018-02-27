@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+#include <stdlib.h>
 
 int main(int argc, char* argv[]) {
     int web_enabled = 0;
@@ -46,7 +47,12 @@ int main(int argc, char* argv[]) {
         if(web_enabled) update_web_view();
 
         // Emergency stop pressed
-        if (elev_get_stop_signal()) emergency = 1;
+        if (elev_get_stop_signal()) {
+            emergency = 1;
+            elev_set_stop_lamp(1);
+        } else {
+            elev_set_stop_lamp(0);
+        }
     }
 
     return 0;

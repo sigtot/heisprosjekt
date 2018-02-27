@@ -17,7 +17,7 @@ void update_web_view() {
     char command_string [200];
     int direction_up = current_direction ? UP : DOWN;
     sprintf(data_string, "direction=%d&moving=%d&current_floor=%d&last_floor=%d&door_open=%d",
-            direction_up, moving, current_floor, last_floor, door_open);
+            direction_up, moving, get_current_floor(), last_floor, door_open);
     sprintf(command_string, "/usr/bin/curl -s -d \"%s\" 159.65.58.116/heis-web/CEndpoint.php", data_string);
 
     /* Using libcurl turned out to be too much of a headache,
