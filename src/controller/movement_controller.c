@@ -2,9 +2,9 @@
 #include "../model.h"
 
 void update_movement() {
-    if(!door_open && has_unfulfilled_orders() && !emergency) {
-        moving = 1;
-    } else {
+    if(door_open || emergency || !has_unfulfilled_orders()){
         moving = 0;
+    } else {
+        moving = 1;
     }
 }

@@ -3,4 +3,7 @@
 
 #endif //HEIS_STOP_CONTROLLER_H
 
+/**
+ * Stop and start the elevator
+ */
 void update_movement();

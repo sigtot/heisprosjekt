@@ -14,7 +14,7 @@ Direction current_direction;
 
 int moving;
 
-int current_position; // 0-6, even = at floor, odd = between floor
+int current_position; // 0-6 (or 0-(TOP_FLOOR-1)), even = at floor, odd = between floors
 
 int last_floor;
 
@@ -87,7 +87,7 @@ int add_outside_order(int floor, Direction direction);
 int is_outside_ordered(int floor, Direction direction);
 
 /**
- * Delete an order
+ * Delete an outside order
  *
  * @param floor
  * @param direction
@@ -120,7 +120,7 @@ int is_inside_ordered(int floor);
 int delete_inside_order(int floor);
 
 /**
- * Check if any floor is ordered
+ * Check if any other floor than the current is ordered
  *
  * @return 1 if orders exist, 0 if not
  */
