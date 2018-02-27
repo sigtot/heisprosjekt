@@ -30,7 +30,7 @@ int initializing;
 /**
  * If the associated element is 1, the floor is ordered. 0 if not.
  */
-int inside_orders[4]; // Floors 0-TOP_FLOOR
+int inside_orders[N_FLOORS]; // Floors 0-TOP_FLOOR
 
 /**
  * Arrays to keep track of outside orders

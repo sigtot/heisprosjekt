@@ -18,6 +18,7 @@ void INT_handler(int signal);
 int keep_running = 1;
 
 int main(int argc, char* argv[]) {
+    signal(SIGINT, INT_handler);
     int web_enabled = 0; // Web stuff (not a part of project)
 
     // Loop over command line flags
@@ -34,7 +35,6 @@ int main(int argc, char* argv[]) {
     // Initialize model values
     initialize_model(UP);
     do {
-        signal(SIGINT, INT_handler);
         update_floor();
 
         // Light up all floors during startup (if between floors)
@@ -46,7 +46,6 @@ int main(int argc, char* argv[]) {
 
     // Mainloop
     while (keep_running) {
-        signal(SIGINT, INT_handler);
         // The order of these is very important
         update_floor();
         update_direction();
@@ -67,5 +66,6 @@ int main(int argc, char* argv[]) {
 
 void INT_handler(int signal) {
     moving = 0; // Stop elevator before we quit
+    update_view();
     keep_running = 0;
 }
