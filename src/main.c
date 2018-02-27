@@ -11,6 +11,11 @@
 #include <time.h>
 #include <string.h>
 #include <stdlib.h>
+#include <signal.h>
+
+// Handle Ctrl-C
+void INT_handler(int signal);
+int keep_running = 1;
 
 int main(int argc, char* argv[]) {
     int web_enabled = 0; // Web stuff (not a part of project)
@@ -29,6 +34,7 @@ int main(int argc, char* argv[]) {
     // Initialize model values
     initialize_model(UP);
     do {
+        signal(SIGINT, INT_handler);
         update_floor();
 
         // Light up all floors during startup (if between floors)
@@ -36,10 +42,11 @@ int main(int argc, char* argv[]) {
         else last_floor = 0;
 
         update_view();
-    } while (initializing);
+    } while (initializing && keep_running);
 
     // Mainloop
-    while (1) {
+    while (keep_running) {
+        signal(SIGINT, INT_handler);
         // The order of these is very important
         update_floor();
         update_direction();
@@ -56,4 +63,9 @@ int main(int argc, char* argv[]) {
     }
 
     return 0;
+}
+
+void INT_handler(int signal) {
+    moving = 0; // Stop elevator before we quit
+    keep_running = 0;
 }
