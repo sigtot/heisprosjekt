@@ -6,13 +6,14 @@
 #include "controller/order_controller.h"
 #include "controller/direction_controller.h"
 #include "web_updater.h"
+#include "controller/emergency_controller.h"
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
 #include <stdlib.h>
 
 int main(int argc, char* argv[]) {
-    int web_enabled = 0;
+    int web_enabled = 0; // Web stuff (not a part of project)
 
     // Loop over command line flags
     for(int i = 0; i < argc; i++){
@@ -29,6 +30,8 @@ int main(int argc, char* argv[]) {
     moving = 1;
     door_open = 0;
     door_opened_timestamp = 0;
+    stop_button_pressed = 0;
+    emergency = 0;
     update_view();
 
     // Mainloop
@@ -39,20 +42,13 @@ int main(int argc, char* argv[]) {
         update_door();
         update_movement();
         update_order_list(); // Must come after update_door() and update_movement() as this deletes the orders
+        update_emergency_state();
 
         print_model_parameters();
         update_view();
 
         //Web stuff (not a part of project)
         if(web_enabled) update_web_view();
-
-        // Emergency stop pressed
-        if (elev_get_stop_signal()) {
-            emergency = 1;
-            elev_set_stop_lamp(1);
-        } else {
-            elev_set_stop_lamp(0);
-        }
     }
 
     return 0;

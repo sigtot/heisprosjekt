@@ -14,7 +14,6 @@ Direction current_direction;
 
 int moving;
 
-int current_floor; // 0-3, -1 for between floors
 int current_position; // 0-6, even = at floor, odd = between floor
 
 int last_floor;
@@ -23,6 +22,7 @@ int door_open;
 
 long long door_opened_timestamp; // The time when the door last opened
 
+int stop_button_pressed;
 int emergency;
 
 /**

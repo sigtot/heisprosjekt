@@ -34,6 +34,9 @@ int update_view(){
     /* Indicate open door with open door lamp */
     elev_set_door_open_lamp(door_open);
 
+    /* Indicate stop button being pressed */
+    elev_set_stop_lamp(stop_button_pressed);
+
     return 0;
 }
 
