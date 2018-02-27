@@ -40,6 +40,17 @@ int update_view(){
     return 0;
 }
 
+void initialize_model(Direction direction) {
+    moving = 1;
+    current_direction = direction;
+    door_open = 0;
+    door_opened_timestamp = 0;
+    stop_button_pressed = 0;
+    emergency = 0;
+
+    update_view();
+}
+
 void print_model_parameters(){
     clear();
     printf("Direction: %i\n", current_direction);

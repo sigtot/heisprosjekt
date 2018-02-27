@@ -27,12 +27,10 @@ int main(int argc, char* argv[]) {
     }
 
     // Initialize model values
-    moving = 1;
-    door_open = 0;
-    door_opened_timestamp = 0;
-    stop_button_pressed = 0;
-    emergency = 0;
-    update_view();
+    initialize_model(UP);
+    do {
+        update_floor();
+    } while (get_current_floor() == -1);
 
     // Mainloop
     while (1) {

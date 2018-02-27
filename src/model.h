@@ -57,6 +57,13 @@ int outside_down_orders[3];
  */
 int update_view();
 
+/**
+ * Set all the initial model values
+ *
+ * @param direction UP or DOWN to configure startup-direction
+ */
+void initialize_model(Direction direction);
+
 void print_model_parameters();
 
 /**
