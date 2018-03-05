@@ -38,6 +38,8 @@ int inside_orders[N_FLOORS]; // Floors 0-TOP_FLOOR
  * through add_outside_order(), is_outside_ordered() and delete_outside_order()
  * If the associated element is 1, the floor is ordered. 0 if not.
  *
+ *
+ * Meaning of each element for N_FLOORS = 4:
  * Outside up orders:
  * 0: {0, up}
  * 1: {1, up}
@@ -49,8 +51,8 @@ int inside_orders[N_FLOORS]; // Floors 0-TOP_FLOOR
  * 2: {3, down}
  *
  */
-int outside_up_orders[3];
-int outside_down_orders[3];
+int outside_up_orders[N_FLOORS - 1];
+int outside_down_orders[N_FLOORS - 1];
 
 /**
  * Update elevator to match model

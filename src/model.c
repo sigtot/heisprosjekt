@@ -59,11 +59,11 @@ void print_model_parameters(){
     printf("Last floor: %i\n", last_floor);
     printf("Door open: %i\n", door_open);
 
-    for(int floor = 0; floor <= 2; floor++){
+    for(int floor = 0; floor <= TOP_FLOOR - 1; floor++){
         printf("Floor %i UP: %i ", floor, is_outside_ordered(floor, UP));
     }
     printf("\n");
-    for(int floor = 1; floor <= 3; floor++){
+    for(int floor = 1; floor <= TOP_FLOOR; floor++){
         printf("Floor %i DOWN: %i ", floor, is_outside_ordered(floor, DOWN));
     }
 }
