@@ -4,6 +4,12 @@
 
 #include <sys/timeb.h>
 
+/**
+ * Snippet copied from https://programmingtoddler.wordpress.com/2014/11/09/c-how-to-get-system-timestamp-in-second-millisecond-and-microsecond/
+ * @return unix time with milliseconds
+ */
+long long get_timestamp_in_milliseconds();
+
 void update_door() {
     if(get_current_floor() == -1){
         return;

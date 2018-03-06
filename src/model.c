@@ -1,7 +1,17 @@
 #include "model.h"
 #include "driver/elev.h"
 #include <stdio.h>
-#define clear() printf("\033[H\033[J")
+
+/**
+ * Arrays to keep track of orders
+ * They should be "invisible" to the programmer and only accessed through the "interface"
+ * add_outside_order(), is_outside_ordered(), delete_outside_order(),
+ * add_inside_order(), is_inside_ordered() and delete_inside_order().
+ * If the associated element is 1, the floor is ordered. 0 if not.
+ */
+int inside_orders[N_FLOORS]; // Floors 0 - TOP_FLOOR
+int outside_down_orders[N_FLOORS - 1]; // Floors 1 - TOP_FLOOR
+int outside_up_orders[N_FLOORS - 1]; // Floors 0 - TOP_FLOOR-1
 
 int update_view(){
     /* Write movement to elevator */

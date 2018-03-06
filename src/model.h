@@ -28,33 +28,6 @@ int emergency;
 int initializing;
 
 /**
- * If the associated element is 1, the floor is ordered. 0 if not.
- */
-int inside_orders[N_FLOORS]; // Floors 0-TOP_FLOOR
-
-/**
- * Arrays to keep track of outside orders
- * They should be "invisible" to the programmer and only accessed
- * through add_outside_order(), is_outside_ordered() and delete_outside_order()
- * If the associated element is 1, the floor is ordered. 0 if not.
- *
- *
- * Meaning of each element for N_FLOORS = 4:
- * Outside up orders:
- * 0: {0, up}
- * 1: {1, up}
- * 2: {2, up}
- *
- * Outside down orders:
- * 0: {1, down}
- * 1: {2, down}
- * 2: {3, down}
- *
- */
-int outside_up_orders[N_FLOORS - 1];
-int outside_down_orders[N_FLOORS - 1];
-
-/**
  * Update elevator to match model
  *
  * @return 0 for success
