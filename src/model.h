@@ -3,7 +3,7 @@
 #ifndef HEISPROSJEKT_MODEL_H
 #define HEISPROSJEKT_MODEL_H
 
-#define TOP_FLOOR N_FLOORS - 1
+#define TOP_FLOOR (N_FLOORS - 1)
 #define DOOR_WAIT_TIME 3000
 
 #endif //HEISPROSJEKT_MODEL_H
@@ -27,7 +27,7 @@ long long door_opened_timestamp; // Unix timestamp (in ms) when the door last op
 int stop_button_pressed;
 int emergency;
 
-int initializing;
+int in_startup;
 /** --------------- **/
 
 

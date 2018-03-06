@@ -41,7 +41,7 @@ void update_door() {
     int b = (is_outside_ordered(get_current_floor(), DOWN) && current_direction == DOWN && has_orders_below());
 
     // Elevator has fulfilled all orders and someone wants to get on
-    int c = !has_orders_above() && !has_orders_below() && (is_outside_ordered(get_current_floor(), UP) || is_outside_ordered(get_current_floor(), DOWN));
+    int c = !has_unfulfilled_orders() && (is_outside_ordered(get_current_floor(), UP) || is_outside_ordered(get_current_floor(), DOWN));
 
     if(!moving && (a || b || c)){
         door_open = 1;

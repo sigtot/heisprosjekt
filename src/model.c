@@ -50,7 +50,7 @@ void update_view(){
 }
 
 void initialize_model(Direction direction) {
-    initializing = 1;
+    in_startup = 1;
     moving = 1;
     current_direction = direction;
     door_open = 0;

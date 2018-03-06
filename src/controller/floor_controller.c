@@ -7,6 +7,6 @@ void update_floor() {
 
     if(get_current_floor() != -1) {
         last_floor = get_current_floor();
-        initializing = 0; // Startup is finished when we reach a floor
+        in_startup = 0; // Startup is finished when we reach a floor
     }
 }

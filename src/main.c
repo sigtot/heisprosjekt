@@ -19,7 +19,7 @@ int keep_running = 1;
 
 int main(int argc, char* argv[]) {
     signal(SIGINT, INT_handler); // Assign interrupt signal to INT_handler()
-    int web_enabled = 0; // Web stuff (not a part of project)
+    int web_enabled = 0; // Web view of the elevator (not a part of project)
 
     // Loop over command line flags
     for(int i = 0; i < argc; i++){
@@ -45,7 +45,7 @@ int main(int argc, char* argv[]) {
         else last_floor = 0;
 
         update_view();
-    } while (initializing && keep_running);
+    } while (in_startup && keep_running);
 
     // Mainloop
     while (keep_running) {
@@ -53,19 +53,25 @@ int main(int argc, char* argv[]) {
          *
          * During each iteration of the mainloop, every controller function will update the model to reflect the
          * current state of the elevator. Some of the functions read from the same parameters of the model that another writes to,
-         * which is why the order is crucial. At the end of the loop, the model will be written to the elevator
+         * which is why the order is crucial.
+         *
+         * For example when the elevator reaches a floor, the elevator will stop and open the door if there are orders there,
+         * but those same orders will also be deleted as they have been fulfilled.
+         * Therefore, update_order_list() must come after update_door() and update_movement().
+         *
+         * At the end of the loop, the model will be written to the elevator
          * (which in this case is our "view").
          */
         update_floor();
         update_direction();
         update_door();
         update_movement();
-        update_order_list(); // Must come after update_door() and update_movement() as this deletes the orders
+        update_order_list();
         update_emergency_state();
 
         update_view();
 
-        //Web stuff (not a part of project)
+        //Web view of the elevator (not a part of project)
         if(web_enabled) update_web_view();
     }
 
