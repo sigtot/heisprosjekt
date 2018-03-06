@@ -63,8 +63,6 @@ int main(int argc, char* argv[]) {
         update_order_list(); // Must come after update_door() and update_movement() as this deletes the orders
         update_emergency_state();
 
-        print_model_parameters(); // Used for debugging only
-
         update_view();
 
         //Web stuff (not a part of project)

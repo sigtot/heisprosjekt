@@ -50,24 +50,6 @@ void initialize_model(Direction direction) {
     emergency = 0;
 }
 
-void print_model_parameters(){
-    clear();
-    printf("Direction: %i\n", current_direction);
-    printf("Moving: %i\n", moving);
-    printf("Current floor: %i\n", get_current_floor());
-    printf("Current position: %i\n", current_position);
-    printf("Last floor: %i\n", last_floor);
-    printf("Door open: %i\n", door_open);
-
-    for(int floor = 0; floor <= TOP_FLOOR - 1; floor++){
-        printf("Floor %i UP: %i ", floor, is_outside_ordered(floor, UP));
-    }
-    printf("\n");
-    for(int floor = 1; floor <= TOP_FLOOR; floor++){
-        printf("Floor %i DOWN: %i ", floor, is_outside_ordered(floor, DOWN));
-    }
-}
-
 int add_outside_order(int floor, Direction direction) {
     if(direction == UP){
         if(floor < 0 || floor > TOP_FLOOR - 1) return 1; // Invalid order

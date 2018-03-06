@@ -68,8 +68,6 @@ int update_view();
  */
 void initialize_model(Direction direction);
 
-void print_model_parameters();
-
 /**
  * Add outside order
  *
