@@ -104,24 +104,6 @@ void delete_inside_order(int floor){
     inside_orders[floor] = 0;
 }
 
-int has_orders_not_on_current_floor() {
-    for(int floor = 0; floor <= TOP_FLOOR - 1; floor++){
-        if(floor == get_current_floor()) continue;
-        if(is_outside_ordered(floor, UP)) return 1;
-    }
-
-    for(int floor = 1; floor <= TOP_FLOOR; floor++){
-        if(floor == get_current_floor()) continue;
-        if(is_outside_ordered(floor, DOWN)) return 1;
-    }
-
-    for(int floor = 0; floor <= TOP_FLOOR; floor++){
-        if(floor == get_current_floor()) continue;
-        if(is_inside_ordered(floor)) return 1;
-    }
-    return 0;
-}
-
 int has_unfulfilled_orders() {
     for(int floor = 0; floor <= TOP_FLOOR - 1; floor++){
         if(floor == get_current_floor() && current_direction == UP) continue;

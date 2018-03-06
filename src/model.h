@@ -91,13 +91,6 @@ int is_inside_ordered(int floor);
 void delete_inside_order(int floor);
 
 /**
- * Check if any other floor than the current is ordered
- *
- * @return 1 if orders exist, 0 if not
- */
-int has_orders_not_on_current_floor();
-
-/**
  * Check if there are orders left to serve
  *
  * @return 1 if there are unfulfilled orders, 0 if not
