@@ -10,6 +10,8 @@
 
 typedef enum {UP, DOWN} Direction;
 
+
+/** Model parameters **/
 Direction current_direction;
 
 int moving;
@@ -20,19 +22,19 @@ int last_floor;
 
 int door_open;
 
-long long door_opened_timestamp; // The time when the door last opened
+long long door_opened_timestamp; // Unix timestamp (in ms) when the door last opened
 
 int stop_button_pressed;
 int emergency;
 
 int initializing;
+/** --------------- **/
+
 
 /**
  * Update elevator to match model
- *
- * @return 0 for success
  */
-int update_view();
+void update_view();
 
 /**
  * Set all the initial model values
@@ -46,16 +48,15 @@ void initialize_model(Direction direction);
  *
  * @param floor
  * @param direction
- * @return 0 for success, 1 for invalid order
  */
-int add_outside_order(int floor, Direction direction);
+void add_outside_order(int floor, Direction direction);
 
 /**
  * Check if floor is outside ordered with specified direction
  *
  * @param floor
  * @param direction
- * @return 1 if it is ordered, 0 if not
+ * @return 1 if it is ordered, 0 if not (that includes if the order is invalid)
  */
 int is_outside_ordered(int floor, Direction direction);
 
@@ -64,23 +65,21 @@ int is_outside_ordered(int floor, Direction direction);
  *
  * @param floor
  * @param direction
- * @return 0 for success, 1 for invalid order
  */
-int delete_outside_order(int floor, Direction direction);
+void delete_outside_order(int floor, Direction direction);
 
 /**
  * Add inside order
  *
  * @param floor
- * @return 0 for success, 1 for invalid order
  */
-int add_inside_order(int floor);
+void add_inside_order(int floor);
 
 /**
  * Check if certain floor is inside ordered
  *
  * @param floor
- * @return 1 if it is ordered, 0 if not
+ * @return 1 if it is ordered, 0 if not (that includes if the floor is invalid)
  */
 int is_inside_ordered(int floor);
 
@@ -88,9 +87,8 @@ int is_inside_ordered(int floor);
  * Delete inside order
  *
  * @param floor
- * @return 0 for success, 1 for invalid order
  */
-int delete_inside_order(int floor);
+void delete_inside_order(int floor);
 
 /**
  * Check if any other floor than the current is ordered

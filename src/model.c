@@ -1,6 +1,7 @@
 #include "model.h"
 #include "driver/elev.h"
 #include <stdio.h>
+#include <assert.h>
 
 /**
  * Arrays to keep track of orders
@@ -13,7 +14,7 @@ int inside_orders[N_FLOORS]; // Floors 0 - TOP_FLOOR
 int outside_down_orders[N_FLOORS - 1]; // Floors 1 - TOP_FLOOR
 int outside_up_orders[N_FLOORS - 1]; // Floors 0 - TOP_FLOOR-1
 
-int update_view(){
+void update_view(){
     /* Write movement to elevator */
     if(moving) {
         if(current_direction == UP) elev_set_motor_direction(DIRN_UP);
@@ -46,8 +47,6 @@ int update_view(){
 
     /* Indicate stop button being pressed */
     elev_set_stop_lamp(stop_button_pressed);
-
-    return 0;
 }
 
 void initialize_model(Direction direction) {
@@ -60,15 +59,14 @@ void initialize_model(Direction direction) {
     emergency = 0;
 }
 
-int add_outside_order(int floor, Direction direction) {
+void add_outside_order(int floor, Direction direction) {
     if(direction == UP){
-        if(floor < 0 || floor > TOP_FLOOR - 1) return 1; // Invalid order
+        assert(floor >= 0 && floor <= TOP_FLOOR - 1); // Invalid order
         outside_up_orders[floor] = 1;
     } else {
-        if(floor < 1|| floor > TOP_FLOOR) return 1; // Invalid order
+        assert(floor >= 1 && floor <= TOP_FLOOR); // Invalid order
         outside_down_orders[floor - 1] = 1;
     }
-    return 0;
 }
 
 int is_outside_ordered(int floor, Direction direction) {
@@ -81,32 +79,29 @@ int is_outside_ordered(int floor, Direction direction) {
     }
 }
 
-int delete_outside_order(int floor, Direction direction) {
+void delete_outside_order(int floor, Direction direction) {
     if(direction == UP){
-        if(floor < 0 || floor > TOP_FLOOR - 1) return 1; // Invalid order
+        assert(floor >= 0 && floor <= TOP_FLOOR - 1); // Invalid order
         outside_up_orders[floor] = 0;
     } else {
-        if(floor < 1 || floor > TOP_FLOOR) return 1; // Invalid order
+        assert(floor >= 1 && floor <= TOP_FLOOR); // Invalid order
         outside_down_orders[floor - 1] = 0;
     }
-    return 0;
 }
 
-int add_inside_order(int floor){
-    if(floor < 0 || floor > TOP_FLOOR) return 1; // Invalid order
+void add_inside_order(int floor){
+    assert(floor >= 0 && floor <= TOP_FLOOR); // Invalid floor
     inside_orders[floor] = 1;
-    return 0;
 }
 
 int is_inside_ordered(int floor){
-    if(floor < 0 || floor > TOP_FLOOR) return 0; // Invalid order
+    if(floor < 0 || floor > TOP_FLOOR) return 0; // Invalid floor
     return inside_orders[floor];
 }
 
-int delete_inside_order(int floor){
-    if(floor < 0 || floor > TOP_FLOOR) return 1; // Invalid order
+void delete_inside_order(int floor){
+    assert(floor >= 0 && floor <= TOP_FLOOR); // Invalid floor
     inside_orders[floor] = 0;
-    return 0;
 }
 
 int has_orders_not_on_current_floor() {
