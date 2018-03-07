@@ -7,5 +7,7 @@ void update_emergency_state(){
 
     if(stop_button_pressed) {
         emergency = 1;
+    } else if (has_unfulfilled_orders()) {
+        emergency = 0;
     }
 }

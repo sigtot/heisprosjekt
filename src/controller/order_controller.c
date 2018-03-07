@@ -15,21 +15,18 @@ void update_order_list() {
     for(int floor = 0; floor <= top_floor - 1; floor++){
         if(elev_get_button_signal(BUTTON_CALL_UP, floor)){
             add_outside_order(floor, UP);
-            emergency = 0;
         }
     }
 
     for(int floor = 1; floor <= top_floor; floor++){
         if(elev_get_button_signal(BUTTON_CALL_DOWN, floor)){
             add_outside_order(floor, DOWN);
-            emergency = 0;
         }
     }
 
     for(int floor = 0; floor <= top_floor; floor++){
         if(elev_get_button_signal(BUTTON_COMMAND, floor)){
             add_inside_order(floor);
-            emergency = 0;
         }
     }
 }
