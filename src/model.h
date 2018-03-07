@@ -1,22 +1,36 @@
-#include "driver/elev.h"
-
 #ifndef HEISPROSJEKT_MODEL_H
 #define HEISPROSJEKT_MODEL_H
 
-#define TOP_FLOOR (N_FLOORS - 1)
 #define DOOR_WAIT_TIME 3000
 
 #endif //HEISPROSJEKT_MODEL_H
 
 typedef enum {UP, DOWN} Direction;
 
+/**
+* Arrays to keep track of orders
+* They should be "invisible" to the programmer and only accessed through the "interface"
+* add_outside_order(), is_outside_ordered(), delete_outside_order(),
+* add_inside_order(), is_inside_ordered() and delete_inside_order().
+* If the associated element is 1, the floor is ordered. 0 if not.
+*/
+typedef struct {
+    int* inside_orders;          // Floors 0 - top_floor
+    int* outside_down_orders;    // Floors 1 - top_floor
+    int* outside_up_orders;      // Floors 0 - top_floor-1
+} Order_list;
 
 /** Model parameters **/
+int n_floors;
+int top_floor;
+
 Direction current_direction;
+
+Order_list order_list;
 
 int moving;
 
-int current_position; // 0-6 (or 0-(TOP_FLOOR-1)), even = at floor, odd = between floors
+int current_position; // 0-6 (or 0-(top_floor-1)), even = at floor, odd = between floors
 
 int last_floor;
 
@@ -25,23 +39,13 @@ int door_open;
 long long door_opened_timestamp; // Unix timestamp (in ms) when the door last opened
 
 int stop_button_pressed;
+
 int emergency;
 
 int in_startup;
 /** --------------- **/
 
 
-/**
- * Update elevator to match model
- */
-void update_view();
-
-/**
- * Set all the initial model values
- *
- * @param direction UP or DOWN to configure startup-direction
- */
-void initialize_model(Direction direction);
 
 /**
  * Add outside order
@@ -91,6 +95,11 @@ int is_inside_ordered(int floor);
 void delete_inside_order(int floor);
 
 /**
+ * Delete all orders (even unfulfilled)
+ */
+void delete_all_orders();
+
+/**
  * Check if there are orders left to serve
  *
  * @return 1 if there are unfulfilled orders, 0 if not
@@ -120,12 +129,12 @@ int has_orders_below();
 /**
  * Gets the current floor
  *
- * @return 0 - TOP_FLOOR or -1 if between floors
+ * @return 0 - top_floor or -1 if between floors
  */
 int get_current_floor();
 
 /**
  * Sets current floor
- * @param floor 0 - TOP_FLOOR or -1 if between floors
+ * @param floor 0 - top_floor or -1 if between floors
  */
 void set_current_floor(int floor);

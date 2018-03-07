@@ -1,6 +1,5 @@
 #include "door_controller.h"
 #include "../model.h"
-#include <stdio.h>
 
 #include <sys/timeb.h>
 
