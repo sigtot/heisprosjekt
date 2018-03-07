@@ -54,12 +54,19 @@ void update_elevator(){
  * During each iteration of the mainloop, every controller function will update the model to reflect the
  * current state of the elevator. Some of the functions read from the same parameters of the model that another writes to,
  * which is why the order is crucial. At the end of the loop, the model will be written to the elevator.
+ *
+ * Note that update_direction() is ran both before and after update_door() and update_movement().
+ * It needs to be ran before, since the direction should change immediately when we reach the top or bottom.
+ * It also needs to be ran after, since the direction should change immediately after closing the door. If it doesn't,
+ * the door will wait for 3 more seconds before closing.
+ *
  */
 void update_model(){
     update_floor();
     update_direction();
     update_door();
     update_movement();
+    update_direction();
     update_order_list();
     update_emergency_state();
 }
