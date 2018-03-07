@@ -15,6 +15,7 @@ void update_elevator();
 
 /**
  * Update model to reflect changes in the elevator and in the model itself
+ *
  */
 void update_model();
 

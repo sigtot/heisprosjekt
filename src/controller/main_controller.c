@@ -49,6 +49,12 @@ void update_elevator(){
     elev_set_stop_lamp(stop_button_pressed);
 }
 
+/*
+ * The order of the controller functions is very important.
+ * During each iteration of the mainloop, every controller function will update the model to reflect the
+ * current state of the elevator. Some of the functions read from the same parameters of the model that another writes to,
+ * which is why the order is crucial. At the end of the loop, the model will be written to the elevator.
+ */
 void update_model(){
     update_floor();
     update_direction();
