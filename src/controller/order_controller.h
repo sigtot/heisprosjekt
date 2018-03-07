@@ -1,3 +1,8 @@
+/**
+ * @file order_controller.h
+ * @brief Controller for adding and deleting orders
+ */
+
 #ifndef HEIS_LIGHT_CONTROLLER_H
 #define HEIS_LIGHT_CONTROLLER_H
 

@@ -1,3 +1,8 @@
+/**
+ * @file model.h
+ * @brief Contains the entire elevator model.
+ */
+
 #ifndef HEISPROSJEKT_MODEL_H
 #define HEISPROSJEKT_MODEL_H
 
@@ -20,7 +25,7 @@ typedef struct {
     int* outside_up_orders;      // Floors 0 - top_floor-1
 } Order_list;
 
-/** Model parameters **/
+/* Model parameters */
 int n_floors;
 int top_floor;
 
@@ -66,7 +71,6 @@ int is_outside_ordered(int floor, Direction direction);
 
 /**
  * Delete an outside order
- *
  * @param floor
  * @param direction
  */

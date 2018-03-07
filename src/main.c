@@ -1,10 +1,18 @@
+/**
+ * @file main.c
+ * @brief Main program file
+ */
+
 #include "controller/main_controller.h"
 #include <string.h>
 #include <signal.h>
 
 #include "web_updater.h"
 
-// Handle Ctrl-C
+/**
+ * Handle interrupt signal (Ctrl-C)
+ * @param signal is a dummy parameter that still needs to be passed
+ */
 void INT_handler(int signal);
 
 int main(int argc, char* argv[]) {

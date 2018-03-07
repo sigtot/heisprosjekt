@@ -1,3 +1,8 @@
+/**
+ * @file main_controller.h
+ * @brief The middleman between the elevator and the model. Also initializes and terminates the elevator.
+ */
+
 #ifndef HEIS_MAIN_CONTROLLER_H
 #define HEIS_MAIN_CONTROLLER_H
 

@@ -1,3 +1,8 @@
+/**
+ * @file web_updater.h
+ * @brief NOT A PART OF PROJECT. Updates the web-view with the current model and polls for web-orders
+ */
+
 #ifndef HEIS_WEB_UPDATER_H
 #define HEIS_WEB_UPDATER_H
 
