@@ -1,3 +1,8 @@
+/**
+ * @file floor_controller.h
+ * @brief Controller for updating current and last floor
+ */
+
 #ifndef HEIS_EVENT_CONTROLLER_H
 #define HEIS_EVENT_CONTROLLER_H
 

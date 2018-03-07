@@ -1,3 +1,8 @@
+/**
+ * @file emergency_controller.h
+ * @brief Controller for updating the emergency state
+ */
+
 #ifndef HEIS_EMERGENCY_CONTROLLER_H
 #define HEIS_EMERGENCY_CONTROLLER_H
 

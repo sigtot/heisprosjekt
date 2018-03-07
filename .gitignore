@@ -8,3 +8,6 @@ cmake-build-debug/
 # Object and bin directories
 bin/
 obj/
+
+# Doxygen docs
+docs/

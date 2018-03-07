@@ -1,3 +1,8 @@
+/**
+ * @file door_controller.h
+ * @brief Controller for opening and closing the door
+ */
+
 #ifndef HEIS_DOOR_CONTROLLER_H
 #define HEIS_DOOR_CONTROLLER_H
 

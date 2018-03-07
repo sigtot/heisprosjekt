@@ -1,6 +1,6 @@
 #include "floor_controller.h"
-#include "../model.h"
 #include "../driver/elev.h"
+#include "../model.h"
 
 void update_floor() {
     set_current_floor(elev_get_floor_sensor_signal());

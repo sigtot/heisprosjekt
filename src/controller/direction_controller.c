@@ -2,7 +2,7 @@
 #include "../model.h"
 
 void update_direction() {
-    if(get_current_floor() == TOP_FLOOR) current_direction = DOWN;
+    if(get_current_floor() == top_floor) current_direction = DOWN;
     if(get_current_floor() == 0) current_direction = UP;
 
     // Only orders above (or at the current floor in the current direction)
