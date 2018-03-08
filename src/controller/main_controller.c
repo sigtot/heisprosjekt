@@ -57,18 +57,21 @@ void update_elevator(){
  *
  * Note that update_direction() is ran both before and after update_door() and update_movement().
  * It needs to be ran before, since the direction should change immediately when we reach the top or bottom.
- * It also needs to be ran after, since the direction should change immediately after closing the door. If it doesn't,
+ * It also needs to be ran after, since, in certain cases, the direction should change immediately after closing the door. If it doesn't,
  * the door will wait for 3 more seconds before closing.
  *
  */
 void update_model(){
     update_floor();
+    add_orders();
+    update_emergency_state();
+
     update_direction();
     update_door();
     update_movement();
     update_direction();
-    update_order_list();
-    update_emergency_state();
+
+    delete_orders();
 }
 
 void initialize() {
