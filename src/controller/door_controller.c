@@ -15,12 +15,13 @@ void update_door() {
     }
 
     int has_been_ordered_here = is_inside_ordered(get_current_floor()) || is_outside_ordered(get_current_floor(), current_direction);
-    int door_wait_time_over = door_opened_timestamp < get_timestamp_in_milliseconds() - DOOR_WAIT_TIME;
 
     if(has_been_ordered_here || stop_button_pressed) {
         door_open = 1;
         door_opened_timestamp = get_timestamp_in_milliseconds();
     }
+
+    int door_wait_time_over = door_opened_timestamp < get_timestamp_in_milliseconds() - DOOR_WAIT_TIME;
 
     if(door_wait_time_over){
         door_open = 0;
