@@ -96,7 +96,7 @@ void initialize() {
     }
 
     // Move elevator into defined state
-    do {
+    while (in_startup) {
         update_floor();
 
         // Light up all floors during startup (if between floors)
@@ -104,7 +104,7 @@ void initialize() {
         else last_floor = 0;
 
         update_elevator();
-    } while (in_startup);
+    }
 }
 
 void terminate() {
