@@ -9,6 +9,11 @@
 #endif //HEIS_LIGHT_CONTROLLER_H
 
 /**
- * Add new orders and delete fulfilled orders
+ * Listen for button presses and add corresponding orders
  */
-void update_order_list();
+void add_orders();
+
+/**
+ * Delete fulfilled orders when we reach a floor, or on emergency
+ */
+void delete_orders();
