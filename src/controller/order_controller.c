@@ -27,6 +27,8 @@ void delete_orders() {
     // Delete fulfilled orders
     if(get_current_floor() != -1) {
         delete_inside_order(get_current_floor());
+        if(!((get_current_floor() == 0 && current_direction == DOWN) ||
+                (get_current_floor() == top_floor && current_direction == UP)))
         delete_outside_order(get_current_floor(), current_direction);
     }
 
