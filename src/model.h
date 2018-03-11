@@ -10,21 +10,6 @@
 
 typedef enum { UP, DOWN } Direction;
 
-/**
-* Arrays to keep track of orders.
-*
-* They should be "invisible" to the programmer and only accessed through the
-* "interface" add_outside_order(), is_outside_ordered(), delete_outside_order(),
-* add_inside_order(), is_inside_ordered() and delete_inside_order().
-*
-* If the associated element is 1, the floor is ordered. 0 if not.
-*/
-typedef struct {
-    int* inside_orders;        // Floors 0 - top_floor
-    int* outside_down_orders;  // Floors 1 - top_floor
-    int* outside_up_orders;    // Floors 0 - top_floor-1
-} Order_list;
-
 /* Model parameters */
 int n_floors;
 int top_floor;

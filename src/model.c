@@ -2,6 +2,21 @@
 #include <assert.h>
 #include <malloc.h>
 
+/**
+* Arrays to keep track of orders.
+*
+* They should be "invisible" to the programmer and only accessed through the
+* "interface" add_outside_order(), is_outside_ordered(), delete_outside_order(),
+* add_inside_order(), is_inside_ordered() and delete_inside_order().
+*
+* If the associated element is 1, the floor is ordered. 0 if not.
+*/
+typedef struct {
+    int* inside_orders;        // Floors 0 - top_floor
+    int* outside_down_orders;  // Floors 1 - top_floor
+    int* outside_up_orders;    // Floors 0 - top_floor-1
+} Order_list;
+
 static Order_list order_list;
 /* 0-6 (or 0-(top_floor-1)), even = at floor, odd = between floors */
 static int current_position;
