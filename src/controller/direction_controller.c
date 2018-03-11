@@ -19,8 +19,7 @@ void update_direction() {
         // Never switch direction if outside ordered on the current floor in the
         // current direction.
         // Such an order would just be about to be fulfilled, and switching
-        // direction right before
-        // would prevent that from happening
+        // direction right before would prevent that from happening
         if (only_orders_on_current_floor) {
             Direction opposite_direction =
                 (current_direction == UP) ? DOWN : UP;
