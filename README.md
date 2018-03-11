@@ -6,7 +6,6 @@ TTK4235 Tilpassede Datasystemer
 # Dependencies
 * comedilib
 * gcc
-* curl
 
 # Compilation
 * `make` to compile
@@ -15,7 +14,4 @@ TTK4235 Tilpassede Datasystemer
 
 # Usage
 * `./bin/heis` to run
-* Add the `-w` or `--web` flags to enable the web view
-
-# Tests
-* Tests?
+* Add the `-w` or `--web` flags to enable the web view (requires curl)

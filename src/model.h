@@ -48,7 +48,7 @@ int stop_button_pressed;
 int emergency;
 
 int in_startup;
-/** --------------- **/
+/* --------------- */
 
 
 
