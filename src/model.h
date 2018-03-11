@@ -31,12 +31,7 @@ int top_floor;
 
 Direction current_direction;
 
-Order_list order_list;
-
 int moving;
-
-int current_position;  // 0-6 (or 0-(top_floor-1)), even = at floor, odd =
-                       // between floors
 
 int last_floor;
 
@@ -51,6 +46,18 @@ int emergency;
 
 int in_startup;
 /* --------------- */
+
+/**
+ * Set initial model parameters
+ *
+ * @param n_floors_given
+ */
+void init_model(int n_floors_given);
+
+/**
+ * Free up memory used in order arrays
+ */
+void destroy_model();
 
 /**
  * Add outside order

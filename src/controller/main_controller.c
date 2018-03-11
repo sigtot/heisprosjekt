@@ -1,6 +1,6 @@
 #include "main_controller.h"
-#include <malloc.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 // The controller should access both the elevator and the model
 #include "../driver/elev.h"
@@ -82,19 +82,7 @@ void update_model() {
 
 void initialize() {
     // Set initial model parameters
-    in_startup = 1;
-    moving = 1;
-    current_direction = UP;
-    door_open = 0;
-    door_opened_timestamp = 0;
-    stop_button_pressed = 0;
-    emergency = 0;
-    n_floors = N_FLOORS;
-    top_floor = n_floors - 1;
-    order_list = (Order_list){
-        .inside_orders = malloc(n_floors * sizeof(int)),
-        .outside_down_orders = malloc((n_floors - 1) * sizeof(int)),
-        .outside_up_orders = malloc((n_floors - 1) * sizeof(int))};
+    init_model(N_FLOORS);
 
     // Initialize elevator
     if (!elev_init()) {
@@ -120,9 +108,7 @@ void terminate(int exit_code) {
     moving = 0;
     update_elevator();
 
-    free(order_list.inside_orders);
-    free(order_list.outside_down_orders);
-    free(order_list.outside_up_orders);
+    destroy_model();
 
     exit(exit_code);
 }

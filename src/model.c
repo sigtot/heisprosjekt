@@ -1,5 +1,32 @@
 #include "model.h"
 #include <assert.h>
+#include <malloc.h>
+
+static Order_list order_list;
+/* 0-6 (or 0-(top_floor-1)), even = at floor, odd = between floors */
+static int current_position;
+
+void init_model(int n_floors_given) {
+    in_startup = 1;
+    moving = 1;
+    current_direction = UP;
+    door_open = 0;
+    door_opened_timestamp = 0;
+    stop_button_pressed = 0;
+    emergency = 0;
+    n_floors = n_floors_given;
+    top_floor = n_floors - 1;
+    order_list = (Order_list){
+        .inside_orders = malloc(n_floors * sizeof(int)),
+        .outside_down_orders = malloc((n_floors - 1) * sizeof(int)),
+        .outside_up_orders = malloc((n_floors - 1) * sizeof(int))};
+}
+
+void destroy_model() {
+    free(order_list.inside_orders);
+    free(order_list.outside_down_orders);
+    free(order_list.outside_up_orders);
+}
 
 void add_outside_order(int floor, Direction direction) {
     if (direction == UP) {
