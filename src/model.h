@@ -8,21 +8,21 @@
 
 #define DOOR_WAIT_TIME 3000
 
-#endif //HEISPROSJEKT_MODEL_H
-
-typedef enum {UP, DOWN} Direction;
+typedef enum { UP, DOWN } Direction;
 
 /**
-* Arrays to keep track of orders
-* They should be "invisible" to the programmer and only accessed through the "interface"
-* add_outside_order(), is_outside_ordered(), delete_outside_order(),
+* Arrays to keep track of orders.
+*
+* They should be "invisible" to the programmer and only accessed through the
+* "interface" add_outside_order(), is_outside_ordered(), delete_outside_order(),
 * add_inside_order(), is_inside_ordered() and delete_inside_order().
+*
 * If the associated element is 1, the floor is ordered. 0 if not.
 */
 typedef struct {
-    int* inside_orders;          // Floors 0 - top_floor
-    int* outside_down_orders;    // Floors 1 - top_floor
-    int* outside_up_orders;      // Floors 0 - top_floor-1
+    int* inside_orders;        // Floors 0 - top_floor
+    int* outside_down_orders;  // Floors 1 - top_floor
+    int* outside_up_orders;    // Floors 0 - top_floor-1
 } Order_list;
 
 /* Model parameters */
@@ -35,13 +35,15 @@ Order_list order_list;
 
 int moving;
 
-int current_position; // 0-6 (or 0-(top_floor-1)), even = at floor, odd = between floors
+int current_position;  // 0-6 (or 0-(top_floor-1)), even = at floor, odd =
+                       // between floors
 
 int last_floor;
 
 int door_open;
 
-long long door_opened_timestamp; // Unix timestamp (in ms) when the door last opened
+long long
+    door_opened_timestamp;  // Unix timestamp (in ms) when the door last opened
 
 int stop_button_pressed;
 
@@ -49,8 +51,6 @@ int emergency;
 
 int in_startup;
 /* --------------- */
-
-
 
 /**
  * Add outside order
@@ -144,3 +144,5 @@ int get_current_floor();
  * @param floor 0 - top_floor or -1 if between floors
  */
 void set_current_floor(int floor);
+
+#endif  // HEISPROSJEKT_MODEL_H

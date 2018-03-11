@@ -6,8 +6,6 @@
 #ifndef HEIS_LIGHT_CONTROLLER_H
 #define HEIS_LIGHT_CONTROLLER_H
 
-#endif //HEIS_LIGHT_CONTROLLER_H
-
 /**
  * Listen for button presses and add corresponding orders
  */
@@ -18,3 +16,5 @@ void add_orders();
  * Delete all orders on emergency
  */
 void delete_orders();
+
+#endif  // HEIS_LIGHT_CONTROLLER_H

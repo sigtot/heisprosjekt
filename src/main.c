@@ -16,12 +16,13 @@
 void INT_handler(int signal);
 
 int main(int argc, char* argv[]) {
-    signal(SIGINT, INT_handler); // Assign interrupt signal to INT_handler()
-    int web_enabled = 0; // Web view of the elevator (not a part of project)
+    signal(SIGINT, INT_handler);  // Assign interrupt signal to INT_handler()
+    int web_enabled = 0;  // Web view of the elevator (not a part of project)
 
     // Loop over command line flags
-    for(int i = 0; i < argc; i++){
-        if(strcmp(argv[i], "--web") == 0 || strcmp(argv[i], "-w") == 0) web_enabled = 1;
+    for (int i = 0; i < argc; i++) {
+        if (strcmp(argv[i], "--web") == 0 || strcmp(argv[i], "-w") == 0)
+            web_enabled = 1;
     }
 
     initialize();
@@ -32,7 +33,8 @@ int main(int argc, char* argv[]) {
         update_elevator();
 
         // Web view of the elevator (not a part of project)
-        if(web_enabled) update_web_view();
+        if (web_enabled)
+            update_web_view();
     }
 
     return 0;
