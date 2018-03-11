@@ -39,5 +39,5 @@ int main(int argc, char* argv[]) {
 }
 
 void INT_handler(int signal) {
-    terminate();
+    terminate(0);
 }

@@ -9,7 +9,7 @@
 #endif //HEIS_EVENT_CONTROLLER_H
 
 /**
- * Update current and last floor
+ * Update current and last floor.
  * End startup phase when we reach a floor
  */
 void update_floor();

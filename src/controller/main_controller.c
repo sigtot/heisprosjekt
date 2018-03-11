@@ -92,7 +92,7 @@ void initialize() {
     // Initialize elevator
     if (!elev_init()) {
         printf("Unable to initialize elevator hardware!\n");
-        terminate();
+        terminate(1);
     }
 
     // Move elevator into defined state
@@ -107,7 +107,7 @@ void initialize() {
     }
 }
 
-void terminate() {
+void terminate(int exit_code) {
     moving = 0;
     update_elevator();
 
@@ -115,5 +115,5 @@ void terminate() {
     free(order_list.outside_down_orders);
     free(order_list.outside_up_orders);
 
-    exit(1);
+    exit(exit_code);
 }

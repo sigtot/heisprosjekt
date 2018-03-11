@@ -9,22 +9,26 @@
 #endif //HEIS_MAIN_CONTROLLER_H
 
 /**
- * Update elevator to match model
+ * Update the physical elevator to match model
  */
 void update_elevator();
 
 /**
- * Update model to reflect changes in the elevator and in the model itself
+ * Update model to reflect changes in the elevator and in the model itself.
  *
+ * A wrapper function for all the controller functions
  */
 void update_model();
 
 /**
- * Initialize entire system, both hardware and model and set the initial model parameters
+ * Initialize entire system (both hardware and model) and set initial model parameters.
+ *
+ * At the beginning of the program, the elevator is in an undefined state where its position is unknown.
+ * This function moves the elevator up until it reaches a floor, thereby bringing it out of the undefined state.
  */
 void initialize();
 
 /**
- *  Stop elevator and free up memory used in order arrays
+ *  Stop elevator, free up memory used in order arrays and exit the program
  */
-void terminate();
+void terminate(int exit_code);

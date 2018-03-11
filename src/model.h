@@ -61,7 +61,7 @@ int in_startup;
 void add_outside_order(int floor, Direction direction);
 
 /**
- * Check if floor is outside ordered with specified direction
+ * Check if certain floor is outside ordered with specified direction
  *
  * @param floor
  * @param direction
@@ -71,6 +71,7 @@ int is_outside_ordered(int floor, Direction direction);
 
 /**
  * Delete an outside order
+ *
  * @param floor
  * @param direction
  */
@@ -139,6 +140,7 @@ int get_current_floor();
 
 /**
  * Sets current floor
+ *
  * @param floor 0 - top_floor or -1 if between floors
  */
 void set_current_floor(int floor);

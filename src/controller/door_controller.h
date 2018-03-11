@@ -9,7 +9,7 @@
 #endif //HEIS_DOOR_CONTROLLER_H
 
 /**
- * Opens or closes the door
+ * Opens or closes the door.
  * Sets the door opened timestamp if the door opens
  */
 void update_door();

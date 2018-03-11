@@ -14,6 +14,7 @@
 void add_orders();
 
 /**
- * Delete fulfilled orders when we reach a floor, or on emergency
+ * Delete fulfilled orders when we reach a floor.
+ * Delete all orders on emergency
  */
 void delete_orders();

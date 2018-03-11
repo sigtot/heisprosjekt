@@ -10,9 +10,8 @@
 long long get_timestamp_in_milliseconds();
 
 void update_door() {
-    if(get_current_floor() == -1){
-        return;
-    }
+    int at_floor = get_current_floor() != -1;
+    if(!at_floor) return;
 
     int has_been_ordered_here = is_inside_ordered(get_current_floor()) || is_outside_ordered(get_current_floor(), current_direction);
 

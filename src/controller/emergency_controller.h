@@ -9,7 +9,7 @@
 #endif //HEIS_EMERGENCY_CONTROLLER_H
 
 /**
- * Enter emergency state when the stop button is pressed
+ * Enter emergency state when the stop button is pressed.
  * Exit when any order is placed
  */
 void update_emergency_state();
